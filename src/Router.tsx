@@ -6,28 +6,23 @@ import CartPage from './CartPage';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <HomePage />,
   },
   {
-    path: '/product/:id',
+    path: "/product/:id",
     element: <ProductPage />,
   },
   {
-    path: '/cart',
+    path: "/cart",
     element: <CartPage />,
   },
 ]);
 
-class App extends Component {
+class AppRouter extends Component {
   render() {
-    return (
-      <div>
-        <RouterProvider router={router} />
-      </div>
-    );
+    return <RouterProvider router={router} />;
   }
 }
 
-export default App;
-
+export default AppRouter;
