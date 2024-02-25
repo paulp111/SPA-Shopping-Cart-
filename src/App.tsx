@@ -1,33 +1,41 @@
-import { Component } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
-import ProductPage from './ProductPage';
-import CartPage from './CartPage';
+import CartPage from './CartPage'; // Stellen Sie sicher, dass Sie CartPage hier importieren
+import { CartProvider } from './CartContext';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomePage />,
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#131921', // Dunkelblau wie Amazon Header
+    },
+    secondary: {
+      main: '#ff9900', // Amazon-Button Orange
+    },
+    background: {
+      default: '#eaeded', // Amazon Hintergrund Grau
+    },
   },
-  {
-    path: '/product/:id',
-    element: <ProductPage />,
+  typography: {
+    fontFamily: 'Arial, sans-serif',
   },
-  {
-    path: '/cart',
-    element: <CartPage />,
-  },
-]);
+});
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <RouterProvider router={router} />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <CartProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/cart" element={<CartPage />} />
+          </Routes>
+        </Router>
+      </CartProvider>
+    </ThemeProvider>
+  );
 }
 
 export default App;
-
